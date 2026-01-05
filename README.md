@@ -2,7 +2,7 @@
 
 ![C++](https://img.shields.io/badge/C%2B%2B-17-blue.svg) ![Estructura](https://img.shields.io/badge/Data%20Structure-AVL%20Tree-green.svg) ![Status](https://img.shields.io/badge/Status-Completed-success.svg)
 
-> **Proyecto Final de Algoritmos y Estructuras de Datos** > Una solución robusta de consola para la gestión de inventarios empresariales, implementando **Árboles de Búsqueda AVL (Adelson-Velsky y Landis)** para garantizar una complejidad algorítmica de $O(\log n)$ en todas las operaciones críticas, junto con persistencia de datos y una interfaz de usuario mejorada.
+> **Proyecto Final de Organización de Archivos** > Una solución robusta de consola para la gestión de inventarios empresariales, implementando **Árboles de Búsqueda AVL (Adelson-Velsky y Landis)** para garantizar una complejidad algorítmica de $O(\log n)$ en todas las operaciones críticas, junto con persistencia de datos y una interfaz de usuario mejorada.
 
 ---
 
