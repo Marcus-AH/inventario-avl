@@ -1,0 +1,2 @@
+100 Laptop 20
+300 Celular 50
