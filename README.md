@@ -96,12 +96,12 @@ Para garantizar el cumplimiento de la rúbrica, el equipo se dividió en roles t
 
 | Integrante | Rol Técnico | Aportes Específicos al Código |
 | :--- | :--- | :--- |
-| **Amaya Herrera, Marco Valentín** | *Core Backend Developer* | Diseño de la estructura `struct Nodo` y `struct Producto`. Implementación de la lógica de **Inserción Recursiva** y la gestión de punteros del árbol. |
-| **Fernandez Lara, Angie Elizabeth** | *Algorithm Specialist* | Desarrollo del motor matemático de **Auto-balanceo**. Responsable de las funciones de `rotarIzquierda`, `rotarDerecha` y cálculo de alturas dinámicas. |
-| **Rodriguez Agreda, Fernando David** | *Backend Operations* | Implementación de los algoritmos de **Búsqueda Binaria** y la compleja lógica de **Eliminación** (búsqueda del sucesor in-order para nodos con dos hijos). |
-| **Silva Sifuentes, Diego Joseph** | *Persistence & Reporting* | Desarrollo del sistema de archivos (`fstream`). Creación de la función `exportarExcel()` que genera el reporte CSV con múltiples tablas. |
-| **Ruiz Bustamante, Adrien Mourice Ivan** | *POS System Architect* | Arquitectura del **Módulo de Ventas**. Implementación de `struct Venta`, lógica de descuento de stock, cálculo de `gananciasAcumuladas` por producto y registro de Clientes. |
-| **Barrantes Juarez, Paolo Rai** | *Frontend & QA* | Diseño de la **Interfaz de Usuario**, visualizador gráfico del árbol (`verArbolGrafico`), validación de entradas robusta y control de calidad. |
+| **Amaya Herrera, Marco Valentín** | Diseño de la estructura `struct Nodo` y `struct Producto`. Implementación de la lógica de **Inserción Recursiva** y la gestión de punteros del árbol. |
+| **Fernandez Lara, Angie Elizabeth** | Desarrollo del motor matemático de **Auto-balanceo**. Responsable de las funciones de `rotarIzquierda`, `rotarDerecha` y cálculo de alturas dinámicas. |
+| **Rodriguez Agreda, Fernando David** | Implementación de los algoritmos de **Búsqueda Binaria** y la compleja lógica de **Eliminación** (búsqueda del sucesor in-order para nodos con dos hijos). |
+| **Silva Sifuentes, Diego Joseph** | Desarrollo del sistema de archivos (`fstream`). Creación de la función `exportarExcel()` que genera el reporte CSV con múltiples tablas. |
+| **Ruiz Bustamante, Adrien Mourice Ivan** | Arquitectura del **Módulo de Ventas**. Implementación de `struct Venta`, lógica de descuento de stock, cálculo de `gananciasAcumuladas` por producto y registro de Clientes. |
+| **Barrantes Juarez, Paolo Rai** | Diseño de la **Interfaz de Usuario**, visualizador gráfico del árbol (`verArbolGrafico`), validación de entradas robusta y control de calidad. |
 
 ---
 
