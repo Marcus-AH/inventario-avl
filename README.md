@@ -94,8 +94,8 @@ Cierre el programa (**Opción [0]**) y vuélvalo a abrir.
 
 Para garantizar el cumplimiento de la rúbrica, el equipo se dividió en roles técnicos específicos:
 
-| Integrante | Rol Técnico | Aportes Específicos al Código |
-| :--- | :--- | :--- |
+| Integrante | Aportes Específicos al Código |
+| :--- | :--- |
 | **Amaya Herrera, Marco Valentín** | Diseño de la estructura `struct Nodo` y `struct Producto`. Implementación de la lógica de **Inserción Recursiva** y la gestión de punteros del árbol. |
 | **Fernandez Lara, Angie Elizabeth** | Desarrollo del motor matemático de **Auto-balanceo**. Responsable de las funciones de `rotarIzquierda`, `rotarDerecha` y cálculo de alturas dinámicas. |
 | **Rodriguez Agreda, Fernando David** | Implementación de los algoritmos de **Búsqueda Binaria** y la compleja lógica de **Eliminación** (búsqueda del sucesor in-order para nodos con dos hijos). |
