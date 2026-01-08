@@ -2,7 +2,7 @@
 
 ![C++](https://img.shields.io/badge/Language-C%2B%2B17-blue.svg) ![Structure](https://img.shields.io/badge/Data%20Structure-AVL%20Tree-green.svg) ![Status](https://img.shields.io/badge/Build-Stable-success.svg) ![Export](https://img.shields.io/badge/Report-Excel%20CSV-orange.svg)
 
-> **Trabajo Final de Estructura de Datos**
+> **Trabajo Final de Organización de Archivos**
 > Una solución integral de software para la administración de stock, facturación y análisis de ganancias, optimizada matemáticamente con árboles auto-balanceados para garantizar un rendimiento de búsqueda $O(\log n)$ y equipada con reportes de negocio avanzados.
 
 ---
