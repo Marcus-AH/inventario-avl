@@ -55,6 +55,41 @@ El proyecto sigue un diseño modular estricto para facilitar el mantenimiento y 
 
 ---
 
+## 🧪 Caso de Prueba: Guía Paso a Paso
+
+Para demostrar la funcionalidad completa del sistema durante la exposición, siga este guion de prueba:
+
+### Paso 1: Inicialización y Carga
+Ejecute el programa. Si existen archivos previos (`inventario.txt`), el sistema mostrará un mensaje de carga silenciosa.
+
+### Paso 2: Alta de Productos (Inserción AVL)
+Ingrese a la **Opción [1]** y registre los siguientes datos (en este orden para probar el balanceo):
+1.  **ID:** `100` | **Nombre:** `Laptop_Gamer` | **Stock:** `10` | **Precio:** `1500`
+2.  **ID:** `50`  | **Nombre:** `Mouse_RGB`    | **Stock:** `20` | **Precio:** `50`
+3.  **ID:** `150` | **Nombre:** `Teclado_Mec`  | **Stock:** `15` | **Precio:** `100`
+
+> *Prueba Técnica:* Vaya a la **Opción [5] (Ver Árbol)**. Debería ver al ID `100` como raíz, `50` a la izquierda y `150` a la derecha (Balanceado).
+
+### Paso 3: Realizar una Venta (POS)
+Ingrese a la **Opción [6] (Nueva Venta)**:
+* **ID Producto:** `100`
+* **Cantidad:** `2`
+* **Cliente:** `Juan Perez`
+* **DNI:** `12345678`
+
+> *Resultado:* El sistema mostrará "Venta Exitosa", cobrará `$3000` y el stock de la Laptop bajará a `8`.
+
+### Paso 4: Generación de Reportes
+Ingrese a la **Opción [9] (Exportar Excel)**.
+* El sistema generará el archivo `ReporteCompleto.csv`.
+* **Acción:** Abra este archivo en Excel. Verificará que existen dos tablas: una con el stock actualizado (8 Laptops) y otra con la venta registrada a nombre de "Juan Perez".
+
+### Paso 5: Persistencia
+Cierre el programa (**Opción [0]**) y vuélvalo a abrir.
+* Vaya a la **Opción [4]**. Verifique que los productos y las ganancias siguen ahí.
+
+---
+
 ## 👥 Roles y Aportes del Equipo
 
 Para garantizar el cumplimiento de la rúbrica, el equipo se dividió en roles técnicos específicos:
