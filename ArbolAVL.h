@@ -6,10 +6,11 @@
 #include <algorithm>
 #include <iomanip>
 #include <fstream>
+#include <vector>
 
 using namespace std;
 
-// Colores para la consola (Funcionan en VS Code)
+// --- COLORES ---
 #define RESET   "\033[0m"
 #define ROJO    "\033[31m"
 #define VERDE   "\033[32m"
@@ -18,10 +19,23 @@ using namespace std;
 #define CYAN    "\033[36m"
 #define BOLD    "\033[1m"
 
+// Estructura del Producto
 struct Producto {
     int id;
     string nombre;
     int cantidad;
+    float precio; 
+    float gananciasAcumuladas; // <--- NUEVO: Cuánto dinero ha generado este producto históricamente
+};
+
+// Estructura de Venta
+struct Venta {
+    int idProducto;
+    string nombreProducto;
+    int cantidadVendida;
+    float totalVenta;
+    string nombreCliente; // <--- NUEVO
+    string dniCliente;    // <--- NUEVO
 };
 
 struct Nodo {
@@ -34,7 +48,9 @@ struct Nodo {
 class ArbolAVL {
 private:
     Nodo* raiz;
+    vector<Venta> historialVentas;
 
+    // Funciones internas AVL
     int obtenerAltura(Nodo* n);
     int obtenerBalance(Nodo* n);
     Nodo* rotarDerecha(Nodo* y);
@@ -42,23 +58,45 @@ private:
     Nodo* insertarNodo(Nodo* nodo, Producto p);
     Nodo* nodoValorMinimo(Nodo* nodo);
     Nodo* eliminarNodo(Nodo* raiz, int id);
-    void inOrden(Nodo* raiz);
     Nodo* buscarNodo(Nodo* raiz, int id);
-    void guardarAux(Nodo* nodo, ofstream& archivo);
     
-    // Nueva función para imprimir el árbol bonito
+    // Auxiliares
+    void inOrden(Nodo* raiz);
+    void guardarAux(Nodo* nodo, ofstream& archivo);
     void imprimirArbol(Nodo* raiz, int espacio);
+    
+    // Auxiliares Reportes
+    void exportarCSVInventario(Nodo* nodo, ofstream& archivo);
+    void reporteBajoStockAux(Nodo* nodo, bool& hayAlertas);
+    void calcularValorTotalAux(Nodo* nodo, float& total);
 
 public:
     ArbolAVL();
-    void insertar(int id, string nombre, int cant);
+    
+    // CRUD
+    // Nota: 'ganancia' se inicializa en 0 al crear, pero se carga del archivo si existe
+    void insertar(int id, string nombre, int cant, float precio, float ganancia = 0.0);
     void eliminar(int id);
     void buscar(int id);
-    void mostrarInventario(); // Lista tabla
-    void verArbolGrafico();   // Dibujo del árbol
+    
+    // Venta con Cliente
+    void registrarVenta(int id, int cantidad, string cliente, string dni); // <--- ACTUALIZADO
+
+    // Visualización
+    void mostrarInventario();
+    void verArbolGrafico();
     bool estaVacio();
+
+    // Persistencia
     void guardarEnArchivo();
     void cargarDesdeArchivo();
+    void guardarVentas();
+    void cargarVentas();
+
+    // Reportes
+    void exportarExcel(); 
+    void reporteBajoStock();
+    void mostrarValorTotal();
 };
 
 #endif

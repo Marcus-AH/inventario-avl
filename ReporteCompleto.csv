@@ -1,0 +1,16 @@
+REPORTE DE RENDIMIENTO E INVENTARIO,,,,
+,,,,
+--- TABLA 1: ESTADO DEL PRODUCTO ---,,,,
+ID,Producto,Stock Actual,Precio Unitario,GANANCIA HISTORICA GENERADA ($)
+2,Televisor_LG,16,1599,6396
+1,Laptop_Asus,7,2599,20792
+3,Poco_X7_Pro,16,1099,2198
+,,,,
+,,,,
+--- TABLA 2: BITACORA DE VENTAS ---,,,,
+ID Prod,Producto,Cliente,DNI,Cant. Vendida,Monto Venta ($)
+3,Poco_X7_Pro,Marco Amaya,72401063,2,2198
+2,Televisor_LG,Yesica,43513004,4,6396
+1,Laptop_Asus,Raul,73406234,8,20792
+,,,,,
+,,,,TOTAL CAJA:,29386

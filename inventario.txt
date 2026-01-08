@@ -1,2 +1,3 @@
-100 Laptop 20
-300 Celular 50
+2 Televisor_LG 16 1599 6396
+1 Laptop_Asus 7 2599 20792
+3 Poco_X7_Pro 16 1099 2198

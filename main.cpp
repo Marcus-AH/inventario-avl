@@ -1,6 +1,6 @@
 #include <iostream>
 #include <limits>
-#include <stdlib.h> // Para system("pause") o cin.get()
+#include <string>
 #include "ArbolAVL.h"
 
 using namespace std;
@@ -15,28 +15,31 @@ void limpiarPantalla() {
 
 void pausar() {
     cout << "\n" << BOLD << "Presione Enter para continuar..." << RESET;
-    cin.ignore();
+    // cin.ignore se maneja localmente en los casos que usan getline para evitar doble salto
     cin.get();
 }
 
 void mostrarBanner() {
     cout << CYAN << BOLD;
-    cout << "  ____           _   _              \n";
-    cout << " |  _ \\ ___  ___| |_(_) ___  _ __   \n";
-    cout << " | |_) / _ \\/ __| __| |/ _ \\| '_ \\  \n";
-    cout << " |  _ <  __/ (__| |_| | (_) | | | | \n";
-    cout << " |_| \\_\\___|\\___|\\__|_|\\___/|_| |_| \n";
-    cout << "     SISTEMA DE INVENTARIO AVL      \n" << RESET;
-    cout << "====================================\n";
+    cout << "  ____            _   _                 \n";
+    cout << " |  _ \\ ___  __ _| |_(_) ___  _ __      \n";
+    cout << " | |_) / _ \\/ _` | __| |/ _ \\| '_ \\     \n";
+    cout << " |  _ <  __/ (_| | |_| | (_) | | | |    \n";
+    cout << " |_| \\_\\___|\\__, |\\__|_|\\___/|_| |_|    \n";
+    cout << "            |___/                       \n";
+    cout << "  SISTEMA POS & INVENTARIO AVL          \n" << RESET;
+    cout << "========================================\n";
 }
 
 int main() {
     ArbolAVL inventario;
     int opcion, id, cantidad;
-    string nombre;
+    float precio;
+    string nombre, cliente, dni;
 
-    // Cargar datos silenciosamente
+    // Cargar historial
     inventario.cargarDesdeArchivo();
+    inventario.cargarVentas();
 
     do {
         limpiarPantalla();
@@ -45,62 +48,81 @@ int main() {
         cout << BOLD << " [1] " << RESET << "Agregar Producto" << endl;
         cout << BOLD << " [2] " << RESET << "Buscar Producto" << endl;
         cout << BOLD << " [3] " << RESET << "Eliminar Producto" << endl;
-        cout << BOLD << " [4] " << RESET << "Ver Lista (Tabla)" << endl;
-        cout << BOLD << " [5] " << RESET << "Ver Estructura Arbol (Grafico)" << endl; // NUEVO
-        cout << BOLD << " [6] " << RESET << "Guardar y Salir" << endl;
-        cout << "\n Seleccione una opcion: ";
+        cout << BOLD << " [4] " << RESET << "Ver Inventario + Ganancias" << endl;
+        cout << BOLD << " [5] " << RESET << "Ver Arbol Grafico" << endl;
+        cout << " ------------------------------" << endl;
+        cout << AMARILLO << " [6] " << RESET << "NUEVA VENTA (Cliente)" << endl; 
+        cout << " ------------------------------" << endl;
+        cout << " [7] " << "Reporte Bajo Stock" << endl;
+        cout << " [8] " << "Capital en Inventario" << endl;
+        cout << VERDE    << " [9] " << RESET << "Exportar EXCEL (Completo)" << endl;
+        cout << " [0] " << "Guardar y Salir" << endl;
         
+        cout << "\n Seleccione: ";
         while(!(cin >> opcion)){
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << ROJO << " Opcion invalida. Intente de nuevo: " << RESET;
+            cin.clear(); cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << ROJO << " Ingrese numero: " << RESET;
         }
 
         switch(opcion) {
             case 1:
-                cout << "\n--- NUEVO REGISTRO ---\n";
+                cout << "\n--- ALTA DE PRODUCTO ---\n";
                 cout << " ID: "; cin >> id;
-                cout << " Nombre (sin espacios): "; cin >> nombre;
+                cout << " Nombre (Sin_Espacios): "; cin >> nombre;
                 cout << " Cantidad: "; cin >> cantidad;
-                inventario.insertar(id, nombre, cantidad);
+                cout << " Precio: $"; cin >> precio;
+                inventario.insertar(id, nombre, cantidad, precio);
                 inventario.guardarEnArchivo();
-                pausar();
+                cin.ignore(); cin.get(); // Pausa manual
                 break;
             case 2:
-                cout << "\n--- BUSQUEDA ---\n";
-                cout << " ID a buscar: "; cin >> id;
-                inventario.buscar(id);
-                pausar();
+                cout << " ID a buscar: "; cin >> id; inventario.buscar(id); 
+                cin.ignore(); cin.get(); 
                 break;
             case 3:
-                cout << "\n--- ELIMINAR ---\n";
-                cout << " ID a eliminar: "; cin >> id;
-                inventario.eliminar(id);
-                inventario.guardarEnArchivo();
-                pausar();
+                cout << " ID a eliminar: "; cin >> id; inventario.eliminar(id); inventario.guardarEnArchivo(); 
+                cin.ignore(); cin.get();
                 break;
             case 4:
-                limpiarPantalla();
-                mostrarBanner();
-                inventario.mostrarInventario();
-                pausar();
+                limpiarPantalla(); inventario.mostrarInventario(); 
+                cin.ignore(); cin.get();
                 break;
             case 5:
-                limpiarPantalla();
-                mostrarBanner();
-                inventario.verArbolGrafico();
-                pausar();
+                limpiarPantalla(); inventario.verArbolGrafico(); 
+                cin.ignore(); cin.get();
                 break;
-            case 6:
-                inventario.guardarEnArchivo();
-                cout << "\n" << VERDE << " Guardando cambios..." << RESET << endl;
-                cout << " ¡Hasta luego!" << endl;
+            case 6: 
+                // --- VENTA COMPLETA CON CLIENTE ---
+                cout << "\n--- FACTURACION ---\n";
+                cout << " ID Producto: "; cin >> id;
+                cout << " Cantidad: "; cin >> cantidad;
+                
+                // Limpieza de buffer vital para leer strings con espacios
+                cin.ignore(); 
+                
+                cout << " Nombre Cliente: "; 
+                getline(cin, cliente); // Permite espacios (Ej: Juan Perez)
+                
+                cout << " DNI / RUC: "; 
+                getline(cin, dni);
+                
+                inventario.registrarVenta(id, cantidad, cliente, dni);
+                cin.get(); // Pausa
+                break;
+            case 7:
+                inventario.reporteBajoStock(); cin.ignore(); cin.get(); break;
+            case 8:
+                inventario.mostrarValorTotal(); cin.ignore(); cin.get(); break;
+            case 9:
+                inventario.exportarExcel(); cin.ignore(); cin.get(); break;
+            case 0:
+                inventario.guardarEnArchivo(); inventario.guardarVentas();
+                cout << "\n Cerrando sistema..." << endl;
                 break;
             default:
-                cout << ROJO << " Opcion no reconocida." << RESET << endl;
-                pausar();
+                cout << " Opcion invalida." << endl; cin.ignore(); cin.get();
         }
-    } while(opcion != 6);
+    } while(opcion != 0);
 
     return 0;
 }

@@ -1,93 +1,86 @@
-# 📦 Sistema de Gestión de Inventario Inteligente (AVL)
+# 🛒 Sistema de Gestión de Inventario y POS (Punto de Venta) con Árboles AVL
 
-![C++](https://img.shields.io/badge/C%2B%2B-17-blue.svg) ![Estructura](https://img.shields.io/badge/Data%20Structure-AVL%20Tree-green.svg) ![Status](https://img.shields.io/badge/Status-Completed-success.svg)
+![C++](https://img.shields.io/badge/Language-C%2B%2B17-blue.svg) ![Structure](https://img.shields.io/badge/Data%20Structure-AVL%20Tree-green.svg) ![Status](https://img.shields.io/badge/Build-Stable-success.svg) ![Export](https://img.shields.io/badge/Report-Excel%20CSV-orange.svg)
 
-> **Proyecto Final de Algoritmos y Estructuras de Datos** > Una solución robusta de consola para la gestión de inventarios empresariales, implementando **Árboles de Búsqueda AVL (Adelson-Velsky y Landis)** para garantizar una complejidad algorítmica de $O(\log n)$ en todas las operaciones críticas, junto con persistencia de datos y una interfaz de usuario mejorada.
+> **Trabajo Final de Estructura de Datos**
+> Una solución integral de software para la administración de stock, facturación y análisis de ganancias, optimizada matemáticamente con árboles auto-balanceados para garantizar un rendimiento de búsqueda $O(\log n)$ y equipada con reportes de negocio avanzados.
 
 ---
 
 ## 📑 Tabla de Contenidos
 1. [Descripción del Proyecto](#-descripción-del-proyecto)
-2. [Características Técnicas](#-características-técnicas)
+2. [Características Técnicas del Sistema](#-características-técnicas-del-sistema)
 3. [Estructura del Código](#-estructura-del-código)
-4. [Instalación y Ejecución](#-instalación-y-ejecución)
-5. [Roles y Aportes del Equipo](#-roles-y-aportes-del-equipo-6-integrantes)
-6. [Demostración Visual](#-demostración-visual)
+4. [Roles y Aportes del Equipo](#-roles-y-aportes-del-equipo)
+5. [Instalación y Ejecución](#-instalación-y-ejecución)
 
 ---
 
 ## 📖 Descripción del Proyecto
-Este software permite a una empresa gestionar su stock de productos de manera eficiente. A diferencia de las listas lineales o árboles binarios simples (BST), este sistema se **autobalancea**.
+Este proyecto simula un software empresarial real. Su núcleo no es una lista simple, sino un **Árbol Binario de Búsqueda AVL (Adelson-Velsky y Landis)**. Esto permite que el sistema se reordene automáticamente mediante rotaciones matemáticas cada vez que se inserta o elimina un producto, asegurando que la búsqueda de información sea instantánea.
 
-Si se ingresan productos con IDs consecutivos (ej. 10, 20, 30...), el sistema detecta el desequilibrio y realiza **rotaciones matemáticas automáticas** para reorganizar los nodos. Esto asegura que la búsqueda de un producto entre millones de registros sea instantánea. Además, cuenta con un sistema de archivos para que la información no se pierda al cerrar el programa.
+Además de la gestión de almacén, el sistema incluye un **Módulo de Ventas (POS)** capaz de registrar clientes (DNI/Nombre), calcular ganancias históricas por producto y exportar toda la información financiera a hojas de cálculo compatibles con Excel.
 
 ---
 
-## 🚀 Características Técnicas
+## 🚀 Características Técnicas del Sistema
 
-### 1. Correctitud Funcional (Backend)
-* **CRUD Completo:** Crear, Leer, Actualizar (balanceo) y Borrar productos.
-* **Algoritmo AVL:** Implementación de cálculo de `Factor de Equilibrio` (Altura Izquierda - Altura Derecha).
-* **Rotaciones:** Soporte para los 4 casos de reestructuración:
-    * Rotación Simple Derecha (LL).
-    * Rotación Simple Izquierda (RR).
-    * Rotación Doble Izquierda-Derecha (LR).
-    * Rotación Doble Derecha-Izquierda (RL).
+### 1. Backend y Algoritmos (AVL Logic)
+* **Autobalanceo Matemático:** Implementación de cálculo de `Factor de Equilibrio` y ejecución de las 4 rotaciones (Simple Izq/Der y Dobles) para mantener la eficiencia.
+* **Búsqueda Logarítmica:** Acceso a cualquier producto en tiempo $O(\log n)$.
+* **Eliminación Robusta:** Algoritmo capaz de reestructurar el árbol al eliminar nodos críticos (raíz o nodos intermedios).
 
-### 2. Persistencia de Datos
-* Uso de la librería `<fstream>` para serializar el árbol en un archivo `inventario.txt`.
-* Carga automática (`Load on Startup`) y guardado automático (`Auto-Save`) tras cada modificación.
+### 2. Inteligencia de Negocios (Business Logic)
+* **Facturación con Cliente:** Registro de ventas vinculadas a datos reales del cliente (Nombre y DNI/RUC).
+* **Análisis de Rentabilidad:** Cada nodo del árbol rastrea cuánto dinero ha generado históricamente (`gananciasAcumuladas`).
+* **Alertas de Stock:** Monitoreo en tiempo real para detectar productos con stock crítico (< 5 unidades).
 
-### 3. Interfaz de Usuario (UX/UI)
-* **Visualizador Gráfico:** Algoritmo recursivo que imprime el árbol en consola mostrando la jerarquía visual de nodos.
-* **Feedback Visual:** Uso de códigos ANSI para colores (Verde para éxitos, Rojo para errores).
-* **Robustez:** Validación de `cin` para evitar crasheos por errores de tipo de dato (Input Sanitization).
+### 3. Persistencia y Reportes (IO)
+* **Persistencia Dual:** Uso de `fstream` para mantener dos bases de datos: `inventario.txt` (Stock y Ganancias) y `ventas.txt` (Bitácora de Transacciones).
+* **Exportación Avanzada:** Generación de `ReporteCompleto.csv` con doble tabulación: Estado del Inventario y Historial de Ventas Detallado.
 
 ---
 
 ## 📂 Estructura del Código
 
-El proyecto sigue un diseño modular para cumplir con los estándares de **Calidad de Código**:
+El proyecto sigue un diseño modular estricto para facilitar el mantenimiento y la escalabilidad:
 
-| Archivo | Responsabilidad |
+| Archivo | Responsabilidad Técnica |
 | :--- | :--- |
-| `main.cpp` | **Controlador:** Maneja el bucle principal, menú, validación de entradas y llamadas al backend. |
-| `ArbolAVL.h` | **Cabecera:** Definición de estructuras (`struct Producto`, `struct Nodo`) y prototipos de la clase `ArbolAVL`. |
-| `ArbolAVL.cpp` | **Lógica de Negocio:** Implementación de recursividad, inserción, eliminación compleja, rotaciones y manejo de archivos. |
-| `Utils.h` / `Colors` | Definiciones de macros para el manejo de colores en consola y limpieza de pantalla multiplataforma. |
-| `inventario.txt` | **Base de Datos:** Archivo de texto plano generado automáticamente para la persistencia. |
+| **`main.cpp`** | **Controlador:** Gestiona el bucle principal, menú interactivo y la limpieza de buffer (`cin.ignore`) para lectura de cadenas con espacios. |
+| **`ArbolAVL.h`** | **Definiciones:** Contiene los `structs` clave (`Venta`, `Producto`, `Nodo`) y los prototipos de la clase `ArbolAVL`. |
+| **`ArbolAVL.cpp`** | **Motor Lógico:** Implementa la recursividad, rotaciones, lógica de ventas, cálculo de ganancias y manejo de archivos. |
+| **`inventario.txt`** | **Base de Datos 1:** Almacena el estado actual del árbol (ID, Nombre, Stock, Precio, Ganancia). |
+| **`ventas.txt`** | **Base de Datos 2:** Registro histórico de todas las transacciones realizadas (Cliente, Monto, Fecha). |
 
 ---
 
-## 👥 Roles y Aportes del Equipo (6 Integrantes)
+## 👥 Roles y Aportes del Equipo
 
-Para cumplir con el desarrollo integral, el equipo se dividió en células de trabajo especializadas:
+Para garantizar el cumplimiento de la rúbrica, el equipo se dividió en roles técnicos específicos:
 
-### 🔹 Equipo de Arquitectura y Estructura (Backend Core)
-* **[Amaya Herrea Marco Valentín]:** Diseño de la estructura `struct Nodo` y `class ArbolAVL`. Implementación de la lógica de **Inserción Recursiva** y cálculo de alturas dinámicas.
-* **[Fernandez Lara Angie Elizabeth]:** Desarrollo de la lógica matemática de las **Rotaciones (Simples y Dobles)**. Responsable de asegurar que el árbol nunca pierda su propiedad AVL tras una inserción crítica.
-
-### 🔹 Equipo de Operaciones Complejas (Backend Advanced)
-* **[Rodriguez Agreda Fernando David]:** Implementación del algoritmo de **Eliminación (Delete)**. Manejo de los 3 casos borde: nodo hoja, nodo con 1 hijo, y nodo con 2 hijos (búsqueda del sucesor in-order).
-* **[Silva Sifuentes Diego Joseph]:** Desarrollo del sistema de archivos (`fstream`). Creación de las funciones `guardarEnArchivo()` (serialización recursiva) y `cargarDesdeArchivo()` (parsing de texto a árbol).
-
-### 🔹 Equipo de Frontend y Control de Calidad (UI/UX & QA)
-* **[Ruiz Bustamante Adrien Mourice Ivan]:** Diseño del menú interactivo, implementación de colores ANSI y la función crítica `verArbolGrafico()` para visualizar la estructura del árbol en consola.
-* **[Barrantes Juarez Paolo Rai]:** Validación de entradas (evitar bucles infinitos con `cin.fail`), pruebas de estrés (casos extremos), redacción del README y edición del video demostrativo.
+| Integrante | Rol Técnico | Aportes Específicos al Código |
+| :--- | :--- | :--- |
+| **Amaya Herrera, Marco Valentín** | *Core Backend Developer* | Diseño de la estructura `struct Nodo` y `struct Producto`. Implementación de la lógica de **Inserción Recursiva** y la gestión de punteros del árbol. |
+| **Fernandez Lara, Angie Elizabeth** | *Algorithm Specialist* | Desarrollo del motor matemático de **Auto-balanceo**. Responsable de las funciones de `rotarIzquierda`, `rotarDerecha` y cálculo de alturas dinámicas. |
+| **Rodriguez Agreda, Fernando David** | *Backend Operations* | Implementación de los algoritmos de **Búsqueda Binaria** y la compleja lógica de **Eliminación** (búsqueda del sucesor in-order para nodos con dos hijos). |
+| **Silva Sifuentes, Diego Joseph** | *Persistence & Reporting* | Desarrollo del sistema de archivos (`fstream`). Creación de la función `exportarExcel()` que genera el reporte CSV con múltiples tablas. |
+| **Ruiz Bustamante, Adrien Mourice Ivan** | *POS System Architect* | Arquitectura del **Módulo de Ventas**. Implementación de `struct Venta`, lógica de descuento de stock, cálculo de `gananciasAcumuladas` por producto y registro de Clientes. |
+| **Barrantes Juarez, Paolo Rai** | *Frontend & QA* | Diseño de la **Interfaz de Usuario**, visualizador gráfico del árbol (`verArbolGrafico`), validación de entradas robusta y control de calidad. |
 
 ---
 
 ## 🛠️ Instalación y Ejecución
 
 ### Requisitos Previos
-* Compilador G++ (MinGW para Windows).
-* Visual Studio Code (Recomendado).
+* Compilador G++ (MinGW para Windows o nativo en Linux/Mac).
+* Entorno de desarrollo recomendado: Visual Studio Code.
 
-### Paso 1: Compilación
-Abre la terminal en la carpeta del proyecto y ejecuta el comando de enlazado:
+### Compilación
+Abra la terminal en la carpeta del proyecto y ejecute:
 
 ```bash
-g++ main.cpp ArbolAVL.cpp -o inventario 
+g++ main.cpp ArbolAVL.cpp -o sistema_pos 
 ```
 ### Paso 2: Ejecución
 Una vez que el comando anterior termine sin errores, inicia el programa con:
