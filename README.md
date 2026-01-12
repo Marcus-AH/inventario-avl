@@ -2,7 +2,7 @@
 
 ![C++](https://img.shields.io/badge/Language-C%2B%2B17-blue.svg) ![Structure](https://img.shields.io/badge/Data%20Structure-AVL%20Tree-green.svg) ![Status](https://img.shields.io/badge/Build-Stable-success.svg) ![Export](https://img.shields.io/badge/Report-Excel%20CSV-orange.svg)
 
-> **Trabajo Final de Estructura de Datos**
+> **Trabajo Final de Organización de Archivos**
 > Una solución integral de software para la administración de stock, facturación y análisis de ganancias, optimizada matemáticamente con árboles auto-balanceados para garantizar un rendimiento de búsqueda $O(\log n)$ y equipada con reportes de negocio avanzados.
 
 ---
@@ -55,18 +55,53 @@ El proyecto sigue un diseño modular estricto para facilitar el mantenimiento y 
 
 ---
 
+## 🧪 Caso de Prueba: Guía Paso a Paso
+
+Para demostrar la funcionalidad completa del sistema durante la exposición, siga este guion de prueba:
+
+### Paso 1: Inicialización y Carga
+Ejecute el programa. Si existen archivos previos (`inventario.txt`), el sistema mostrará un mensaje de carga silenciosa.
+
+### Paso 2: Alta de Productos (Inserción AVL)
+Ingrese a la **Opción [1]** y registre los siguientes datos (en este orden para probar el balanceo):
+1.  **ID:** `100` | **Nombre:** `Laptop_Gamer` | **Stock:** `10` | **Precio:** `1500`
+2.  **ID:** `50`  | **Nombre:** `Mouse_RGB`    | **Stock:** `20` | **Precio:** `50`
+3.  **ID:** `150` | **Nombre:** `Teclado_Mec`  | **Stock:** `15` | **Precio:** `100`
+
+> *Prueba Técnica:* Vaya a la **Opción [5] (Ver Árbol)**. Debería ver al ID `100` como raíz, `50` a la izquierda y `150` a la derecha (Balanceado).
+
+### Paso 3: Realizar una Venta (POS)
+Ingrese a la **Opción [6] (Nueva Venta)**:
+* **ID Producto:** `100`
+* **Cantidad:** `2`
+* **Cliente:** `Juan Perez`
+* **DNI:** `12345678`
+
+> *Resultado:* El sistema mostrará "Venta Exitosa", cobrará `$3000` y el stock de la Laptop bajará a `8`.
+
+### Paso 4: Generación de Reportes
+Ingrese a la **Opción [9] (Exportar Excel)**.
+* El sistema generará el archivo `ReporteCompleto.csv`.
+* **Acción:** Abra este archivo en Excel. Verificará que existen dos tablas: una con el stock actualizado (8 Laptops) y otra con la venta registrada a nombre de "Juan Perez".
+
+### Paso 5: Persistencia
+Cierre el programa (**Opción [0]**) y vuélvalo a abrir.
+* Vaya a la **Opción [4]**. Verifique que los productos y las ganancias siguen ahí.
+
+---
+
 ## 👥 Roles y Aportes del Equipo
 
 Para garantizar el cumplimiento de la rúbrica, el equipo se dividió en roles técnicos específicos:
 
-| Integrante | Rol Técnico | Aportes Específicos al Código |
-| :--- | :--- | :--- |
-| **Amaya Herrera, Marco Valentín** | *Core Backend Developer* | Diseño de la estructura `struct Nodo` y `struct Producto`. Implementación de la lógica de **Inserción Recursiva** y la gestión de punteros del árbol. |
-| **Fernandez Lara, Angie Elizabeth** | *Algorithm Specialist* | Desarrollo del motor matemático de **Auto-balanceo**. Responsable de las funciones de `rotarIzquierda`, `rotarDerecha` y cálculo de alturas dinámicas. |
-| **Rodriguez Agreda, Fernando David** | *Backend Operations* | Implementación de los algoritmos de **Búsqueda Binaria** y la compleja lógica de **Eliminación** (búsqueda del sucesor in-order para nodos con dos hijos). |
-| **Silva Sifuentes, Diego Joseph** | *Persistence & Reporting* | Desarrollo del sistema de archivos (`fstream`). Creación de la función `exportarExcel()` que genera el reporte CSV con múltiples tablas. |
-| **Ruiz Bustamante, Adrien Mourice Ivan** | *POS System Architect* | Arquitectura del **Módulo de Ventas**. Implementación de `struct Venta`, lógica de descuento de stock, cálculo de `gananciasAcumuladas` por producto y registro de Clientes. |
-| **Barrantes Juarez, Paolo Rai** | *Frontend & QA* | Diseño de la **Interfaz de Usuario**, visualizador gráfico del árbol (`verArbolGrafico`), validación de entradas robusta y control de calidad. |
+| Integrante | Aportes Específicos al Código |
+| :--- | :--- |
+| **Amaya Herrera, Marco Valentín** | Diseño de la estructura `struct Nodo` y `struct Producto`. Implementación de la lógica de **Inserción Recursiva** y la gestión de punteros del árbol. |
+| **Fernandez Lara, Angie Elizabeth** | Desarrollo del motor matemático de **Auto-balanceo**. Responsable de las funciones de `rotarIzquierda`, `rotarDerecha` y cálculo de alturas dinámicas. |
+| **Rodriguez Agreda, Fernando David** | Implementación de los algoritmos de **Búsqueda Binaria** y la compleja lógica de **Eliminación** (búsqueda del sucesor in-order para nodos con dos hijos). |
+| **Silva Sifuentes, Diego Joseph** | Desarrollo del sistema de archivos (`fstream`). Creación de la función `exportarExcel()` que genera el reporte CSV con múltiples tablas. |
+| **Ruiz Bustamante, Adrien Mourice Ivan** | Arquitectura del **Módulo de Ventas**. Implementación de `struct Venta`, lógica de descuento de stock, cálculo de `gananciasAcumuladas` por producto y registro de Clientes. |
+| **Barrantes Juarez, Paolo Rai** | Diseño de la **Interfaz de Usuario**, visualizador gráfico del árbol (`verArbolGrafico`), validación de entradas robusta y control de calidad. |
 
 ---
 
