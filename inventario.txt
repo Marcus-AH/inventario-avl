@@ -1,3 +1,5 @@
-2 Televisor_LG 16 1599 6396
-1 Laptop_Asus 7 2599 20792
-3 Poco_X7_Pro 16 1099 2198
+2 Televisor_LG 20 1099 5495
+1 Laptop_Asus 10 2599 12995
+4 Mouse_Pad 25 39 0
+3 Mouse_Generico 2 49 637
+5 Laptop_Lenovo 25 2499 0

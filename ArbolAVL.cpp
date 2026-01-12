@@ -35,7 +35,7 @@ Nodo* ArbolAVL::insertarNodo(Nodo* nodo, Producto p) {
     if (p.id < nodo->dato.id) nodo->izquierda = insertarNodo(nodo->izquierda, p);
     else if (p.id > nodo->dato.id) nodo->derecha = insertarNodo(nodo->derecha, p);
     else { 
-        // Si ya existe, actualizamos datos pero MANTENEMOS la ganancia acumulada previa si no se especifica
+        
         float gananciaPrev = nodo->dato.gananciasAcumuladas;
         nodo->dato = p; 
         if (p.gananciasAcumuladas == 0) nodo->dato.gananciasAcumuladas = gananciaPrev; 
@@ -95,7 +95,7 @@ void ArbolAVL::eliminar(int id) {
 }
 
 // ==========================================
-// === NUEVA LÓGICA DE VENTAS CON CLIENTE ===
+// === LÓGICA DE VENTAS CON CLIENTE ===
 // ==========================================
 
 void ArbolAVL::registrarVenta(int id, int cantidad, string cliente, string dni) {
@@ -115,7 +115,7 @@ void ArbolAVL::registrarVenta(int id, int cantidad, string cliente, string dni) 
     nodo->dato.cantidad -= cantidad;
     float total = cantidad * nodo->dato.precio;
     
-    // ACUMULAR GANANCIA AL PRODUCTO (NUEVO)
+    // ACUMULAR GANANCIA AL PRODUCTO
     nodo->dato.gananciasAcumuladas += total; 
 
     // Guardar en historial
@@ -134,7 +134,7 @@ void ArbolAVL::guardarVentas() {
     ofstream archivo("ventas.txt");
     if (archivo.is_open()) {
         for (const auto& v : historialVentas) {
-            // Reemplazar espacios en nombre cliente por guiones bajos para evitar error de lectura simple
+            
             string clienteSeguro = v.nombreCliente;
             replace(clienteSeguro.begin(), clienteSeguro.end(), ' ', '_');
             
@@ -151,7 +151,7 @@ void ArbolAVL::cargarVentas() {
     
     Venta v;
     while (archivo >> v.idProducto >> v.nombreProducto >> v.cantidadVendida >> v.totalVenta >> v.nombreCliente >> v.dniCliente) {
-        // Restaurar espacios en nombre cliente
+        
         replace(v.nombreCliente.begin(), v.nombreCliente.end(), '_', ' ');
         historialVentas.push_back(v);
     }
@@ -222,7 +222,7 @@ bool ArbolAVL::estaVacio() { return raiz == nullptr; }
 
 void ArbolAVL::guardarAux(Nodo* nodo, ofstream& archivo) {
     if (nodo != nullptr) {
-        // ID Nombre Cantidad Precio GananciaAcumulada
+        
         archivo << nodo->dato.id << " " << nodo->dato.nombre << " " 
                 << nodo->dato.cantidad << " " << nodo->dato.precio << " " << nodo->dato.gananciasAcumuladas << endl;
         guardarAux(nodo->izquierda, archivo);
@@ -239,12 +239,12 @@ void ArbolAVL::cargarDesdeArchivo() {
     ifstream archivo("inventario.txt");
     if (!archivo.is_open()) return;
     int id, cant; float precio, ganancia; string nom;
-    // Ahora lee 5 campos
+    
     while (archivo >> id >> nom >> cant >> precio >> ganancia) { insertar(id, nom, cant, precio, ganancia); }
     archivo.close();
 }
 
-// --- EXPORTAR EXCEL ACTUALIZADO ---
+// --- EXPORTAR EXCEL  ---
 void ArbolAVL::exportarCSVInventario(Nodo* nodo, ofstream& archivo) {
     if (nodo != nullptr) {
         // ID, Nombre, Stock, Precio, GananciaTotalDeEsteProducto

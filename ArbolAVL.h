@@ -25,7 +25,7 @@ struct Producto {
     string nombre;
     int cantidad;
     float precio; 
-    float gananciasAcumuladas; // <--- NUEVO: Cuánto dinero ha generado este producto históricamente
+    float gananciasAcumuladas; 
 };
 
 // Estructura de Venta
@@ -34,8 +34,8 @@ struct Venta {
     string nombreProducto;
     int cantidadVendida;
     float totalVenta;
-    string nombreCliente; // <--- NUEVO
-    string dniCliente;    // <--- NUEVO
+    string nombreCliente;
+    string dniCliente; 
 };
 
 struct Nodo {
@@ -80,7 +80,7 @@ public:
     void buscar(int id);
     
     // Venta con Cliente
-    void registrarVenta(int id, int cantidad, string cliente, string dni); // <--- ACTUALIZADO
+    void registrarVenta(int id, int cantidad, string cliente, string dni);
 
     // Visualización
     void mostrarInventario();

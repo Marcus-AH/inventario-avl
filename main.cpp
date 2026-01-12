@@ -15,7 +15,7 @@ void limpiarPantalla() {
 
 void pausar() {
     cout << "\n" << BOLD << "Presione Enter para continuar..." << RESET;
-    // cin.ignore se maneja localmente en los casos que usan getline para evitar doble salto
+    
     cin.get();
 }
 
@@ -97,17 +97,17 @@ int main() {
                 cout << " ID Producto: "; cin >> id;
                 cout << " Cantidad: "; cin >> cantidad;
                 
-                // Limpieza de buffer vital para leer strings con espacios
+                
                 cin.ignore(); 
                 
                 cout << " Nombre Cliente: "; 
-                getline(cin, cliente); // Permite espacios (Ej: Juan Perez)
+                getline(cin, cliente);
                 
                 cout << " DNI / RUC: "; 
                 getline(cin, dni);
                 
                 inventario.registrarVenta(id, cantidad, cliente, dni);
-                cin.get(); // Pausa
+                cin.get();
                 break;
             case 7:
                 inventario.reporteBajoStock(); cin.ignore(); cin.get(); break;
